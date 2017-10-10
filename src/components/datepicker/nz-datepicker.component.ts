@@ -58,12 +58,12 @@ const en = {
 }
 
 @Component({
-  selector     : 'nz-datepicker',
+  selector: 'nz-datepicker',
   encapsulation: ViewEncapsulation.None,
-  animations   : [
+  animations: [
     DropDownAnimation
   ],
-  template     : `
+  template: `
     <span style="display: block"
       (click)="_openCalendar()"
       nz-overlay-origin
@@ -121,8 +121,8 @@ const en = {
               </div>
               <div style="position: relative;" *ngIf="_mode=='time'">
                 <span class="ant-calendar-my-select">
-                  <a class="ant-calendar-year-select" title="Choose a month">{{_selectedYear}}年</a>
-                  <a class="ant-calendar-month-select" title="Choose a month">{{_showMonth + 1}}月</a>
+                  <a class="ant-calendar-year-select" title="Choose a month">{{_selectedYear}}{{languages['Year']}}</a>
+                  <a class="ant-calendar-month-select" title="Choose a month">{{_showMonth + 1}}{{languages['Month']}}</a>
                   <a class="ant-calendar-day-select">{{_selectedDate}}{{languages['Day']}}</a>
                 </span>
               </div>
@@ -148,6 +148,7 @@ const en = {
                       [nzMode]="'month'"
                       [nzFullScreen]="false"
                       [nzShowHeader]="false"
+                      [nzLocale]="language"
                       [nzDatePicker]="true">
                     </nz-calendar>
                   </div>
@@ -196,7 +197,7 @@ const en = {
               [ngModel]="_value" (ngModelChange)="_changeTime($event)"
               *ngIf="nzShowTime&&(_mode == 'time')"></nz-timepicker-inner>
             <div class="ant-calendar-calendar-body">
-              <nz-calendar [nzClearTime]="!nzShowTime" [nzDisabledDate]="nzDisabledDate" (nzClickDay)="_clickDay($event)" [nzShowMonth]="_showMonth" [nzShowYear]="_showYear" [nzValue]="_value" (nzClickMonth)="_clickMonth($event)" [nzMode]="'year'" [nzFullScreen]="false" [nzShowHeader]="false" [nzDatePicker]="true"></nz-calendar>
+              <nz-calendar [nzClearTime]="!nzShowTime" [nzLocale]="language" [nzDisabledDate]="nzDisabledDate" (nzClickDay)="_clickDay($event)" [nzShowMonth]="_showMonth" [nzShowYear]="_showYear" [nzValue]="_value" (nzClickMonth)="_clickMonth($event)" [nzMode]="'year'" [nzFullScreen]="false" [nzShowHeader]="false" [nzDatePicker]="true"></nz-calendar>
             </div>
             <div class="ant-calendar-footer ant-calendar-footer-show-ok">
                 <span class="ant-calendar-footer-btn">
@@ -210,14 +211,14 @@ const en = {
         </div>
       </div>
     </ng-template>`,
-  providers    : [
+  providers: [
     {
-      provide    : NG_VALUE_ACCESSOR,
+      provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NzDatePickerComponent),
-      multi      : true
+      multi: true
     }
   ],
-  styleUrls    : [
+  styleUrls: [
     './style/index.less',
     './style/patch.less'
   ]
@@ -238,7 +239,7 @@ export class NzDatePickerComponent implements ControlValueAccessor, OnInit {
   _showYear = moment(new Date()).year();
   _startDecade = Math.floor(this._showYear / 10) * 10;
   _yearPanel: Array<Array<string>> = [];
-  _positions: ConnectionPositionPair[] = [ ...DEFAULT_DATEPICKER_POSITIONS ];
+  _positions: ConnectionPositionPair[] = [...DEFAULT_DATEPICKER_POSITIONS];
   // ngModel Access
   onChange: any = Function.prototype;
   onTouched: any = Function.prototype;
@@ -253,6 +254,7 @@ export class NzDatePickerComponent implements ControlValueAccessor, OnInit {
   @ViewChild(NzTimePickerInnerComponent) timePickerInner: NzTimePickerInnerComponent;
   @HostBinding('class.ant-calendar-picker') _nzCalendarPicker = true;
   languages = {};
+  language = 'zh-cn';
   @Input()
   get nzDisabled(): boolean {
     return this._disabled;
@@ -426,8 +428,8 @@ export class NzDatePickerComponent implements ControlValueAccessor, OnInit {
         _t.push(i);
       }
     }
-    this._yearPanel[ 0 ].unshift('start');
-    this._yearPanel[ 3 ].push('end');
+    this._yearPanel[0].unshift('start');
+    this._yearPanel[3].push('end');
   }
 
   constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {
@@ -436,10 +438,12 @@ export class NzDatePickerComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     this._generateYearPanel();
-    if (localStorage.getItem('language') === 'zh-CN'){
-      this.languages =  zh;
-    }else{
+    if (localStorage.getItem('language') === 'zh_CN') {
+      this.languages = zh;
+      this.language = 'zh-cn';
+    } else {
       this.languages = en;
+      this.language = 'en';
     }
   }
 
