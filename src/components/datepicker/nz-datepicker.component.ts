@@ -74,8 +74,8 @@ import * as en from './en-US.json';
                 <a class="ant-calendar-prev-year-btn" title="language['Pre Year']" (click)="_preYear()"></a>
                 <a class="ant-calendar-prev-month-btn" title="language['Pre Month]'" (click)="_preMonth()"></a>
                 <span class="ant-calendar-ym-select">
-                <a class="ant-calendar-month-select" title="languages['Choice Month']" (click)="_changeMonthView()">{{_showMonth + 1}}月</a>
-                <a class="ant-calendar-year-select" title="languages['Choice Year']" (click)="_changeDecadeView($event)">{{_showYear}}年</a>
+                <a class="ant-calendar-month-select" title="languages['Choice Month']" (click)="_changeMonthView()">{{_showMonth + 1}}{{languages['Month']}}</a>
+                <a class="ant-calendar-year-select" title="languages['Choice Year']" (click)="_changeDecadeView($event)">{{_showYear}}{{languages['Year']}}</a>
                 </span>
                 <a class="ant-calendar-next-month-btn" title="languages['Next Month']" (click)="_nextMonth()"></a>
                 <a class="ant-calendar-next-year-btn" title="languages['Next Year']" (click)="_nextYear()"></a>
