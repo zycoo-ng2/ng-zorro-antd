@@ -9,24 +9,114 @@
 
 更新日志也可以在[Github](https://github.com/NG-ZORRO/ng-zorro-antd/releases)查看
 
+## 0.5.3
+`2017-09-30`
+
+### Features
+* `DatePicker` 支持了选择月份的功能 [#397](https://github.com/NG-ZORRO/ng-zorro-antd/pull/397) [@Hsuan Lee](https://github.com/HsuanXyz)
+* `Select` 支持Tab聚焦并可以使用回车和向下键展开 [#389](https://github.com/NG-ZORRO/ng-zorro-antd/pull/389) [@Hsuan Lee](https://github.com/HsuanXyz)
+* `Menu` 增加了 `Horizontal` 和 `Inline` 模式下的高度动画 [#330](https://github.com/NG-ZORRO/ng-zorro-antd/pull/330) [@刘晓军](https://github.com/Maroon1)
+* `Collapse` 支持自定义头部内容 [#383](https://github.com/NG-ZORRO/ng-zorro-antd/pull/383) [@SangKa.Z](https://github.com/SangKa)
+* 在发布包中导出了全部 `Component` 便于引用 [#404](https://github.com/NG-ZORRO/ng-zorro-antd/pull/404)
+
+### Bug Fixes
+* `Table` 修复了 `nzIsPageIndexReset` 选项的问题 [#372](https://github.com/NG-ZORRO/ng-zorro-antd/pull/372) [#373](https://github.com/NG-ZORRO/ng-zorro-antd/pull/373) Alche
+* 修复了官方网站的性能问题 [#403](https://github.com/NG-ZORRO/ng-zorro-antd/pull/403)
+
+### Docs
+* 增加了对 `Input` 中 `nzPlaceHolder` 的使用说明 [#379](https://github.com/NG-ZORRO/ng-zorro-antd/pull/379) [@Liu, An-Chi](https://github.com/tigercosmos)
+
+## 0.5.2
+`2017-09-23`
+### Features
+* `Modal` 增加 `showConfirmLoading` 选项改变点击确认按钮时的loading状态 [#340](https://github.com/NG-ZORRO/ng-zorro-antd/pull/340) [@Alche](https://github.com/AlcheXie)
+* `Table` 增加确定数据变更后是否保留在数据变更前的页码的选项 `nzIsPageIndexReset` [#348](https://github.com/NG-ZORRO/ng-zorro-antd/pull/348) [#359](https://github.com/NG-ZORRO/ng-zorro-antd/pull/359) [@Alche](https://github.com/AlcheXie)
+* `Select` 增加在 `ngModel` 在 `undefined` 时的重置逻辑 [#363](https://github.com/NG-ZORRO/ng-zorro-antd/pull/363) 
+
+### Bug Fixes
+* `Menu`修复在特定情况下的 `ExpressionChangedAfterItHasBeenCheckedError` 问题 [#368](https://github.com/NG-ZORRO/ng-zorro-antd/pull/368)
+* `Select` 修复在 `Form` 表单 `inline` 状态的对齐问题 [#362](https://github.com/NG-ZORRO/ng-zorro-antd/pull/362)
+* `Carousel` 修复在 `nzAutoPlay` 下的播放问题 [#347](https://github.com/NG-ZORRO/ng-zorro-antd/pull/347) [@Bin](https://github.com/soulhat)
+* `Cascader` 修复 `label` 显示及在 `ReactiveForm` 下重置的问题 [#335](https://github.com/NG-ZORRO/ng-zorro-antd/pull/335) [#336](https://github.com/NG-ZORRO/ng-zorro-antd/pull/336) [#356](https://github.com/NG-ZORRO/ng-zorro-antd/pull/356) [@fbchen](https://github.com/fbchen)
+* `Select` 修复在同步加载数据情况的显示问题 [#338](https://github.com/NG-ZORRO/ng-zorro-antd/pull/338) [@Hsuan Lee](https://github.com/HsuanXyz)
+* `Table` 修复 `nzWidth` 与 `*ngIf` 结合使用时宽度错位的问题 [#349](https://github.com/NG-ZORRO/ng-zorro-antd/pull/349)
+* `Anchor` 修复点击时url改变的问题 [#343](https://github.com/NG-ZORRO/ng-zorro-antd/pull/343) [@卡色](https://github.com/cipchk)
+* 修改 `moment`的打包方式 [#331](https://github.com/NG-ZORRO/ng-zorro-antd/pull/331) [@LinBo len](https://github.com/LinBoLen)
+
+### Docs
+* 修正文档中Angular官网的教程地址 [#325](https://github.com/NG-ZORRO/ng-zorro-antd/pull/325) [@JuniorTour](https://github.com/JuniorTour)
+* 增加 plunker的在线运行模板[#357](https://github.com/NG-ZORRO/ng-zorro-antd/pull/357) [@Trotyl Yu](https://github.com/trotyl)
+
+### Other
+* `Badge` 格式化了template代码 [#314](https://github.com/NG-ZORRO/ng-zorro-antd/pull/314) [@Hsuan Lee](https://github.com/HsuanXyz)
+
+## 0.5.1
+`2017-09-16`
+
+### Features
+* `Menu`支持子菜单选中时，父级菜单高亮显示 [#264](https://github.com/NG-ZORRO/ng-zorro-antd/pull/264) [HsuanXyz](https://github.com/HsuanXyz)
+
+### Bug Fixes
+* `Pagination`修复`nzPageIndexChange`事件被多次触发 [#281](https://github.com/NG-ZORRO/ng-zorro-antd/pull/281) [HsuanXyz](https://github.com/HsuanXyz)
+* `Pagination`修复鼠标双击时，分页文本被选中的情况 [#268](https://github.com/NG-ZORRO/ng-zorro-antd/pull/268) [HsuanXyz](https://github.com/HsuanXyz)
+* `Input`修复类型错误提示 [#283](https://github.com/NG-ZORRO/ng-zorro-antd/pull/283) [deart1mer](https://github.com/deart1mer)
+* `Datepicker`修复年选择框范围错误 [#301](https://github.com/NG-ZORRO/ng-zorro-antd/pull/301) [giscafer](https://github.com/giscafer)
+* `Layout`修复手机下响应式布局行为不一致 [#299](https://github.com/NG-ZORRO/ng-zorro-antd/pull/299)
+
+### Docs
+* `DEMO:Badge`参数使用错误 [#297](https://github.com/NG-ZORRO/ng-zorro-antd/pull/297) [HsuanXyz](https://github.com/HsuanXyz)
+* `DEMO:Select`移除未使用的变量 [#308](https://github.com/NG-ZORRO/ng-zorro-antd/pull/308) [tigercosmos](https://github.com/tigercosmos)
+* `DEMO:Select`增加nzShowSearch的说明 [#279](https://github.com/NG-ZORRO/ng-zorro-antd/pull/279) [SangKa.Z](https://github.com/SangKa)
+
+## 0.5.0
+`2017-09-09`
+
+### Build
+* 重写了打包逻辑，提供了规范的package格式，兼容了更多打包工具 [#240](https://github.com/NG-ZORRO/ng-zorro-antd/pull/240)  [Trotyl Yu](https://github.com/trotyl)
+
+### Features
+* `Table`支持可展开和树形数据展示 [#259](https://github.com/NG-ZORRO/ng-zorro-antd/pull/259)
+* `Table`支持固定表头，自定义筛选，增加远程排序、表格行列排序、可编辑行等DEMO [#210](https://github.com/NG-ZORRO/ng-zorro-antd/pull/210)
+* `Input`支持`nzReadOnly`属性 [#236](https://github.com/NG-ZORRO/ng-zorro-antd/pull/236) [SangKa.Z](https://github.com/SangKa)
+* `Input`支持`nzAutoResize`属性 [#251](https://github.com/NG-ZORRO/ng-zorro-antd/pull/251) [Hsuan Lee](https://github.com/HsuanXyz)
+* `Menu`支持缩起内嵌菜单 [#225](https://github.com/NG-ZORRO/ng-zorro-antd/pull/225) [Hsuan Lee](https://github.com/HsuanXyz)
+* `Grid`中`Col`支持属性内嵌 [#247](https://github.com/NG-ZORRO/ng-zorro-antd/pull/247)
+
+### Bug Fixes
+* `Form`修复了多种组件在表单中不必要的Control触发逻辑 [#257](https://github.com/NG-ZORRO/ng-zorro-antd/pull/257)
+* `CheckBox`修复了在safari中的选中问题 [#256](https://github.com/NG-ZORRO/ng-zorro-antd/pull/256) [SangKa.Z](https://github.com/SangKa)
+* `Carousel`修复了高度计算的问题 [#242](https://github.com/NG-ZORRO/ng-zorro-antd/pull/242)
+* `DropdownButton`修复了下拉菜单无法选中的问题 [#237](https://github.com/NG-ZORRO/ng-zorro-antd/pull/237) [LongYinan](https://github.com/Brooooooklyn)
+* `Datepicker`修复了与React版本顺序不一致的问题 [#243](https://github.com/NG-ZORRO/ng-zorro-antd/pull/243) [Nickbing Lao](https://github.com/giscafer)
+* `InputNumber`修复了数据校验逻辑 [#230](https://github.com/NG-ZORRO/ng-zorro-antd/pull/230)
+* `Cascader`修复了在`nzOptions`变化时不刷新的问题 [#221](https://github.com/NG-ZORRO/ng-zorro-antd/pull/221) [fbchen](https://github.com/fbchen)
+* `Form`修复了多种组件中`setDisabledState`不生效的问题 [#188](https://github.com/NG-ZORRO/ng-zorro-antd/pull/188) [Zhaoming Li](https://github.com/deart1mer)
+* `Select`,`Datepicker`,`Timepicker`修复了当disable时下拉菜单不收起的问题 [#222](https://github.com/NG-ZORRO/ng-zorro-antd/pull/222) [Zhaoming Li](https://github.com/deart1mer)
+* `Select`, `Datepicker`, `Timepicker`, `Radio`, `Checkbox`, `InputNumber`修复了`touched`状态不生效的问题 [#248](https://github.com/NG-ZORRO/ng-zorro-antd/pull/248) [Zhaoming Li](https://github.com/deart1mer)
+* `Input`修复了`nzSize`不生效的问题 [#209](https://github.com/NG-ZORRO/ng-zorro-antd/pull/209) [laobeiV5](https://github.com/gsbybb)
+* 修改了对`DOCUMENT`的错误依赖 [#233](https://github.com/NG-ZORRO/ng-zorro-antd/pull/233) [Trotyl Yu](https://github.com/trotyl)
+
+### Refactor
+* 删除了不必要的`@angular/cdk`依赖 [#241](https://github.com/NG-ZORRO/ng-zorro-antd/pull/241) [Trotyl Yu](https://github.com/trotyl)
+
 ## 0.5.0-rc.4
 `2017-08-31`
 
 ### Features
-* 	`Tooltip`,`Popconfirm`,`Popover`组件支持 OnPush [#143](https://github.com/NG-ZORRO/ng-zorro-antd/pull/143) [@csyszf](https://github.com/csyszf)
-*   `Modal` 提供了 `open`,`close`,`setConfirmLoading`的新方法 [@giscafer](https://github.com/giscafer)
+* `Tooltip`,`Popconfirm`,`Popover`组件支持 OnPush [#143](https://github.com/NG-ZORRO/ng-zorro-antd/pull/143) [@csyszf](https://github.com/csyszf)
+* `Modal` 提供了 `open`,`close`,`setConfirmLoading`的新方法 [@giscafer](https://github.com/giscafer)
 
 ### Bug Fixes
-* 	指定了 `@angular/cdk` 版本，修复因`@angular/cdk`不兼容升级导致的问题
-* 	`Pagination` 修复了 `nzPageIndexChange` 事件在部分情况下不触发的问题 [#189](https://github.com/NG-ZORRO/ng-zorro-antd/pull/189)	[@SangKa](https://github.com/SangKa)
+* 指定了 `@angular/cdk` 版本，修复因`@angular/cdk`不兼容升级导致的问题
+* `Pagination` 修复了 `nzPageIndexChange` 事件在部分情况下不触发的问题 [#189](https://github.com/NG-ZORRO/ng-zorro-antd/pull/189)	[@SangKa](https://github.com/SangKa)
 
 ### Refactor
-*	  `Dropdown` 中优化了`rxjs`的使用方式 [#148](https://github.com/NG-ZORRO/ng-zorro-antd/pull/148) [@Brooooooklyn](https://github.com/Brooooooklyn)
-*   `Calendar` 不再使用 ngOutletContext [#200](https://github.com/NG-ZORRO/ng-zorro-antd/pull/200)  [@chunghha](https://github.com/chunghha)
+* `Dropdown` 中优化了`rxjs`的使用方式 [#148](https://github.com/NG-ZORRO/ng-zorro-antd/pull/148) [@Brooooooklyn](https://github.com/Brooooooklyn)
+* `Calendar` 不再使用 ngOutletContext [#200](https://github.com/NG-ZORRO/ng-zorro-antd/pull/200)  [@chunghha](https://github.com/chunghha)
 
 ### Doc
-* 	修正`Form`样例说明中`nz-demo-form-dynamic` [#186](https://github.com/NG-ZORRO/ng-zorro-antd/pull/186)  [@thegatheringstorm](https://github.com/thegatheringstorm)
-* 	修正`Datapicker`样例中事件范围的禁止选择范围 [#102](https://github.com/NG-ZORRO/ng-zorro-antd/pull/102) [@HsuanXyz](https://github.com/HsuanXyz)
+* 修正`Form`样例说明中`nz-demo-form-dynamic` [#186](https://github.com/NG-ZORRO/ng-zorro-antd/pull/186)  [@thegatheringstorm](https://github.com/thegatheringstorm)
+* 修正`Datapicker`样例中事件范围的禁止选择范围 [#102](https://github.com/NG-ZORRO/ng-zorro-antd/pull/102) [@HsuanXyz](https://github.com/HsuanXyz)
 
 ## 0.5.0-rc.3
 `2017-08-26`

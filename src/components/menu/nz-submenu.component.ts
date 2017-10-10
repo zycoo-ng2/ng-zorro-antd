@@ -19,6 +19,16 @@ import { debounceTime } from 'rxjs/operator/debounceTime';
         style({ opacity: '0' }),
         animate(150, style({ opacity: 1 }))
       ])
+    ]),
+    trigger('expandAnimation', [
+      transition('expand => void', [
+        style({ height: '*', overflow: 'hidden' }),
+        animate(150, style({ height: 0 }))
+      ]),
+      transition('void => expand', [
+        style({ height: 0, overflow: 'hidden' }),
+        animate(150, style({ height: '*' }))
+      ])
     ])
   ],
   template  : `
@@ -34,6 +44,7 @@ import { debounceTime } from 'rxjs/operator/debounceTime';
     <ul
       [class.ant-dropdown-menu]="isInDropDown"
       [@fadeAnimation]
+      [@expandAnimation]="expandState"
       [class.ant-menu]="!isInDropDown"
       [class.ant-dropdown-menu-vertical]="isInDropDown"
       [class.ant-menu-vertical]="(!isInDropDown)&&(nzMenuComponent.nzMode!=='inline')"
@@ -56,6 +67,20 @@ export class NzSubMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   @ContentChildren(NzSubMenuComponent) subMenus;
   @Input() nzOpen = false;
   @Output() nzOpenChange: EventEmitter<boolean> = new EventEmitter();
+
+  get subItemSelected(): boolean {
+    return !!this.nzMenuComponent.menuItems.find(e => e.selected && e.nzSubMenuComponent === this);
+  }
+  get submenuSelected(): boolean {
+    return !!this.subMenus._results.find(e => e !== this && e.subItemSelected)
+  }
+
+  get expandState() {
+    if (this.nzOpen && this.nzMenuComponent.nzMode !== 'vertical') {
+      return 'expand';
+    }
+    return null;
+  }
 
   clickSubMenuTitle() {
     if ((this.nzMenuComponent.nzMode === 'inline') || (!this.isInDropDown)) {
@@ -106,10 +131,14 @@ export class NzSubMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.isInDropDown && (this.nzMenuComponent.nzMode === 'horizontal');
   }
 
-
   @HostBinding('class.ant-menu-submenu')
   get setMenuSubmenuClass() {
     return !this.isInDropDown;
+  }
+
+  @HostBinding('class.ant-menu-submenu-selected')
+  get setMenuSubmenuSelectedClass() {
+    return this.submenuSelected || this.subItemSelected;
   }
 
   @HostBinding('class.ant-menu-submenu-vertical')
@@ -129,7 +158,7 @@ export class NzSubMenuComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   constructor(public nzMenuComponent: NzMenuComponent, public cd: ChangeDetectorRef) {
-    this.nzMenuComponent.hasSubMenu = true;
+    this.nzMenuComponent.setHasSubMenu(true);
     this.nzMenuComponent.subMenus.push(this);
   }
 

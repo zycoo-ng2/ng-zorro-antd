@@ -17,6 +17,7 @@ import {
   ViewChild,
   forwardRef
 } from '@angular/core';
+import { DOWN_ARROW, ENTER, TAB } from '@angular/cdk';
 import { NzOptionComponent } from './nz-option.component';
 import { NzOptionPipe } from './nz-option.pipe';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -39,6 +40,7 @@ import { TagAnimation } from '../core/animation/tag-animations';
   ],
   template     : `
     <div
+      tabindex="0"
       #trigger
       nz-overlay-origin
       #origin="nzOverlayOrigin"
@@ -79,6 +81,7 @@ import { TagAnimation } from '../core/animation/tag-animations';
                 [(ngModel)]="_searchText"
                 (ngModelChange)="updateFilterOption();onSearchChange($event);"
                 (keydown)="updateWidth(searchInput,_searchText)"
+                (blur)="onTouched()"
                 #searchInput>
               <span class="ant-select-search__field__mirror"></span></div>
           </li>
@@ -93,6 +96,7 @@ import { TagAnimation } from '../core/animation/tag-animations';
           <div class="ant-select-search__field__wrap">
             <input
               class="ant-select-search__field"
+              (blur)="onTouched()"
               (compositionstart)="compositionStart()"
               (compositionend)="compositionEnd()"
               [(ngModel)]="_searchText"
@@ -103,7 +107,7 @@ import { TagAnimation } from '../core/animation/tag-animations';
         </div>
       </div>
       <span
-        (click)="clearSelect($event)"
+        (click)="onTouched();clearSelect($event)"
         class="ant-select-selection__clear"
         style="-webkit-user-select: none;"
         *ngIf="_selectedOption?.nzLabel&&nzAllowClear&&!nzMultiple">
@@ -114,7 +118,7 @@ import { TagAnimation } from '../core/animation/tag-animations';
       hasBackdrop
       [origin]="origin"
       (backdropClick)="closeDropDown()"
-      (detach)="closeDropDown()"
+      (detach)="closeDropDown();"
       (positionChange)="onPositionChange($event)"
       [width]="_triggerWidth"
       [open]="_isOpen">
@@ -317,7 +321,11 @@ export class NzSelectComponent implements OnInit, AfterContentInit, AfterContent
   addOption = (option) => {
     this._options.push(option);
     if (!this._isTags) {
-      this.forceUpdateSelectedOption(this._value);
+      if (option.nzValue) {
+        this.updateSelectedOption(this._value);
+      } else {
+        this.forceUpdateSelectedOption(this._value);
+      }
     }
   }
 
@@ -404,10 +412,12 @@ export class NzSelectComponent implements OnInit, AfterContentInit, AfterContent
   }
 
   /** cancel select multiple option */
-  unSelectMultipleOption = (option, $event?) => {
+  unSelectMultipleOption = (option, $event?, emitChange = true) => {
     this._operatingMultipleOption = option;
     this._selectedOptions.delete(option);
-    this.emitMultipleOptions();
+    if (emitChange) {
+      this.emitMultipleOptions();
+    }
 
     // 对Tag进行特殊处理
     if (this._isTags && (this._options.indexOf(option) !== -1) && (this._tagsOptions.indexOf(option) !== -1)) {
@@ -450,12 +460,12 @@ export class NzSelectComponent implements OnInit, AfterContentInit, AfterContent
 
   /** update selected option when add remove option etc */
   updateSelectedOption(currentModelValue, triggerByNgModel = false) {
-    if (currentModelValue === null || currentModelValue === undefined) {
+    if (currentModelValue == null) {
       return;
     }
     if (this.nzMultiple) {
       const selectedOptions = this._options.filter((item) => {
-        return ((item !== null) && (item !== undefined)) && (currentModelValue.indexOf(item.nzValue) !== -1);
+        return (item != null) && (currentModelValue.indexOf(item.nzValue) !== -1);
       });
       if ((this.nzKeepUnListOptions || this.nzTags) && (!triggerByNgModel)) {
         selectedOptions.forEach(option => {
@@ -472,7 +482,7 @@ export class NzSelectComponent implements OnInit, AfterContentInit, AfterContent
 
     } else {
       const selectedOption = this._options.filter((item) => {
-        return (item !== null) && (item.nzValue === currentModelValue);
+        return (item != null) && (item.nzValue === currentModelValue);
       });
       this.chooseOption(selectedOption[ 0 ]);
     }
@@ -490,44 +500,20 @@ export class NzSelectComponent implements OnInit, AfterContentInit, AfterContent
   };
 
   set nzValue(value: Array<string> | string) {
-    if (this._value === value) {
-      return;
-    }
-    if ((value === null) && this.nzMultiple) {
-      this._value = [];
-    } else {
-      this._value = value;
-    }
-    if (!this.nzMultiple) {
-      if (value === null) {
-        this._selectedOption = null;
-      } else {
-        this.updateSelectedOption(value);
-      }
-    } else {
-      if (value) {
-        if (value.length === 0) {
-          this.clearAllSelectedOption();
-        } else {
-          this.updateSelectedOption(value, true);
-        }
-      } else if (value === null) {
-        this.clearAllSelectedOption();
-      }
-
-    }
+    this._updateValue(value);
   }
 
-  clearAllSelectedOption() {
+  clearAllSelectedOption(emitChange = true) {
     this._selectedOptions.forEach(item => {
-      this.unSelectMultipleOption(item);
+      this.unSelectMultipleOption(item, null, emitChange);
     });
   }
 
   handleKeyEnterEvent(event) {
-    /** when composing end */
-    if (!this._composing) {
+      /** when composing end */
+    if (!this._composing && this._isOpen) {
       event.preventDefault();
+      event.stopPropagation();
       this.updateFilterOption(false);
       this.clickOption(this._activeFilterOption);
     }
@@ -610,10 +596,33 @@ export class NzSelectComponent implements OnInit, AfterContentInit, AfterContent
     }
   }
 
+  @HostListener('keydown', [ '$event' ])
+  onKeyDown(e) {
+    const keyCode = e.keyCode;
+    if (keyCode === TAB && this.nzOpen) {
+      this.nzOpen = false;
+      return;
+    }
+    if ( (keyCode !== DOWN_ARROW && keyCode !== ENTER) || this.nzOpen) {
+      return;
+    }
+    e.preventDefault();
+    if (!this._disabled) {
+      this.nzOpen = true;
+      if (this.nzShowSearch) {
+        /** wait for search display */
+        setTimeout(_ => {
+          this.searchInputElementRef.nativeElement.focus();
+        });
+      }
+    }
+  }
+
   closeDropDown() {
     if (!this.nzOpen) {
       return;
     }
+    this.onTouched();
     if (this.nzMultiple) {
       this._renderer.removeStyle(this.searchInputElementRef.nativeElement, 'width');
     }
@@ -692,7 +701,7 @@ export class NzSelectComponent implements OnInit, AfterContentInit, AfterContent
   }
 
   writeValue(value: any): void {
-    this.nzValue = value;
+    this._updateValue(value, false);
   }
 
   registerOnChange(fn: (_: any) => {}): void {
@@ -731,6 +740,33 @@ export class NzSelectComponent implements OnInit, AfterContentInit, AfterContent
     } else {
       this.updateFilterOption(false);
     }
+  }
 
+  private _updateValue(value: string[] | string, emitChange = true) {
+    if (this._value === value) {
+      return;
+    }
+    if ((value == null) && this.nzMultiple) {
+      this._value = [];
+    } else {
+      this._value = value;
+    }
+    if (!this.nzMultiple) {
+      if (value == null) {
+        this._selectedOption = null;
+      } else {
+        this.updateSelectedOption(value);
+      }
+    } else {
+      if (value) {
+        if (value.length === 0) {
+          this.clearAllSelectedOption(emitChange);
+        } else {
+          this.updateSelectedOption(value, true);
+        }
+      } else if (value == null) {
+        this.clearAllSelectedOption(emitChange);
+      }
+    }
   }
 }
