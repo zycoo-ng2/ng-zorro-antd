@@ -15,8 +15,47 @@ import { NzTimePickerInnerComponent } from '../time-picker/nz-timepicker-inner.c
 import { DEFAULT_DATEPICKER_POSITIONS } from '../core/overlay/overlay-position-map';
 import { ConnectionPositionPair } from '../core/overlay/index';
 
-import * as zh from './zh-CN.json';
-import * as en from './en-US.json';
+const zh = {
+  'Clear': '清除',
+  'Pre Year': '上一年',
+  'Pre Month': '上个月',
+  'Choice Year': '选择年份',
+  'Choice Month': '选择月份',
+  'Choice Decade': '选择年代',
+  'Pre Decade': '上一年代',
+  'Next Decade': '下一年代',
+  'Next Month': '下个月',
+  'Next Year': '下一年',
+  'Year': '年',
+  'Month': '月',
+  'Day': '日',
+  'Today': '今天',
+  'Now': '此刻',
+  'Choice Date': '选择日期',
+  'Choice Time': '选择时间',
+  'Confirm': '确定'
+}
+
+const en = {
+  'Clear': 'Clear',
+  'Pre Year': 'Pre Year',
+  'Pre Month': 'Pre Month',
+  'Choice Year': 'Choice Year',
+  'Choice Month': 'Choice Month',
+  'Choice Decade': 'Choice Decade',
+  'Pre Decade': 'Pre Decade',
+  'Next Decade': 'Next Decade',
+  'Next Month': 'Next Month',
+  'Next Year': 'Next Year',
+  'Year': 'Year',
+  'Month': 'Month',
+  'Day': 'Day',
+  'Today': 'Today',
+  'Now': 'Now',
+  'Choice Date': 'Choice Date',
+  'Choice Time': 'Choice Time',
+  'Confirm': 'Confirm'
+}
 
 @Component({
   selector     : 'nz-datepicker',
@@ -397,7 +436,7 @@ export class NzDatePickerComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     this._generateYearPanel();
-    if(localStorage.getItem('language') === 'zh-CN'){
+    if (localStorage.getItem('language') === 'zh-CN'){
       this.languages =  zh;
     }else{
       this.languages = en;
