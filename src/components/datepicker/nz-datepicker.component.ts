@@ -105,36 +105,36 @@ const en = {
                 #dateBox
                 (blur)="_blurInput(dateBox)">
             </div>
-            <a class="ant-calendar-clear-btn" title="languages['Clear']"></a>
+            <a class="ant-calendar-clear-btn" [title]="languages['Clear']"></a>
           </div>
           <div class="ant-calendar-date-panel">
             <div class="ant-calendar-header">
               <div style="position: relative;" *ngIf="_mode!='time'">
-                <a class="ant-calendar-prev-year-btn" title="language['Pre Year']" (click)="_preYear()"></a>
-                <a class="ant-calendar-prev-month-btn" title="language['Pre Month]'" (click)="_preMonth()"></a>
+                <a class="ant-calendar-prev-year-btn" [title]="language['Pre Year']" (click)="_preYear()"></a>
+                <a class="ant-calendar-prev-month-btn" [title]="language['Pre Month']" (click)="_preMonth()"></a>
                 <span class="ant-calendar-ym-select">
-                <a class="ant-calendar-month-select" title="languages['Choice Month']" (click)="_changeMonthView()">{{_showMonth + 1}}{{languages['Month']}}</a>
-                <a class="ant-calendar-year-select" title="languages['Choice Year']" (click)="_changeDecadeView($event)">{{_showYear}}{{languages['Year']}}</a>
+                <a class="ant-calendar-month-select" [title]="languages['Choice Month']" (click)="_changeMonthView()">{{_showMonth + 1}}{{languages['Month']}}</a>
+                <a class="ant-calendar-year-select" [title]="languages['Choice Year']" (click)="_changeDecadeView($event)">{{_showYear}}{{languages['Year']}}</a>
                 </span>
-                <a class="ant-calendar-next-month-btn" title="languages['Next Month']" (click)="_nextMonth()"></a>
-                <a class="ant-calendar-next-year-btn" title="languages['Next Year']" (click)="_nextYear()"></a>
+                <a class="ant-calendar-next-month-btn" [title]="languages['Next Month']" (click)="_nextMonth()"></a>
+                <a class="ant-calendar-next-year-btn" [title]="languages['Next Year']" (click)="_nextYear()"></a>
               </div>
               <div style="position: relative;" *ngIf="_mode=='time'">
                 <span class="ant-calendar-my-select">
-                  <a class="ant-calendar-year-select" title="Choose a month">{{_selectedYear}}{{languages['Year']}}</a>
-                  <a class="ant-calendar-month-select" title="Choose a month">{{_showMonth + 1}}{{languages['Month']}}</a>
+                  <a class="ant-calendar-year-select" [title]="language['Choice Year']">{{_selectedYear}}{{languages['Year']}}</a>
+                  <a class="ant-calendar-month-select" [title]="language['Choice Month']">{{_showMonth + 1}}{{languages['Month']}}</a>
                   <a class="ant-calendar-day-select">{{_selectedDate}}{{languages['Day']}}</a>
                 </span>
               </div>
               <div class="ant-calendar-month-panel" *ngIf="_mode=='month'">
                 <div>
                   <div class="ant-calendar-month-panel-header">
-                    <a class="ant-calendar-month-panel-prev-year-btn" title="language['Pre Year']" (click)="_preYear()"></a>
-                    <a class="ant-calendar-month-panel-year-select" title="languages['Choice Year']" (click)="_changeDecadeView($event)">
+                    <a class="ant-calendar-month-panel-prev-year-btn" [title]="language['Pre Year']" (click)="_preYear()"></a>
+                    <a class="ant-calendar-month-panel-year-select" [title]="languages['Choice Year']" (click)="_changeDecadeView($event)">
                       <span class="ant-calendar-month-panel-year-select-content">{{_showYear}}</span>
                       <span class="ant-calendar-month-panel-year-select-arrow">x</span>
                     </a>
-                    <a class="ant-calendar-month-panel-next-year-btn" title="languages['Next Year']" (click)="_nextYear()"></a>
+                    <a class="ant-calendar-month-panel-next-year-btn" [title]="languages['Next Year']" (click)="_nextYear()"></a>
                   </div>
                   <div class="ant-calendar-month-panel-body">
                     <nz-calendar
@@ -157,12 +157,12 @@ const en = {
               <div class="ant-calendar-year-panel" *ngIf="_mode=='decade'">
                 <div>
                   <div class="ant-calendar-year-panel-header">
-                    <a class="ant-calendar-year-panel-prev-decade-btn" title="languages['Pre Decade']" (click)="_preDecade()"></a>
-                    <a class="ant-calendar-year-panel-decade-select" title="languages['Choice Decade']">
+                    <a class="ant-calendar-year-panel-prev-decade-btn" [title]="languages['Pre Decade']" (click)="_preDecade()"></a>
+                    <a class="ant-calendar-year-panel-decade-select" [title]="languages['Choice Decade']">
                       <span class="ant-calendar-year-panel-decade-select-content">{{_startDecade}}-{{_startDecade + 9}}</span>
                       <span class="ant-calendar-year-panel-decade-select-arrow">x</span>
                     </a>
-                    <a class="ant-calendar-year-panel-next-decade-btn" title="languages['Next Decade']" (click)="_nextDecade()"></a>
+                    <a class="ant-calendar-year-panel-next-decade-btn" [title]="languages['Next Decade']" (click)="_nextDecade()"></a>
                   </div>
                   <div class="ant-calendar-year-panel-body">
                     <table class="ant-calendar-year-panel-table" cellspacing="0" role="grid">
