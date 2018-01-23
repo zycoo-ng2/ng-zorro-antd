@@ -57,6 +57,27 @@ const en = {
   'Confirm': 'Confirm'
 }
 
+const ru = {
+  'Clear': 'Очистить',
+  'Pre Year': 'Прошлый год',
+  'Pre Month': 'Прошлый месяц',
+  'Choice Year': 'Выбрать год',
+  'Choice Month': 'Выбрать месяц',
+  'Choice Decade': 'Выбрать десятилетие',
+  'Pre Decade': 'Прошлое десятилетие',
+  'Next Decade': 'Следующее десятилетие',
+  'Next Month': 'Следующий месяц',
+  'Next Year': 'Следующий год',
+  'Year': 'Год',
+  'Month': 'Месяц',
+  'Day': 'День',
+  'Today': 'Сегодня',
+  'Now': 'Теперь',
+  'Choice Date': 'Выбрать дату',
+  'Choice Time': 'Выбрать время',
+  'Confirm': 'Подвердить'
+}
+
 @Component({
   selector: 'nz-datepicker',
   encapsulation: ViewEncapsulation.None,
@@ -439,12 +460,19 @@ export class NzDatePickerComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     this._generateYearPanel();
-    if (localStorage.getItem('language') === 'zh_CN') {
-      this.languages = zh;
-      this.language = 'zh-cn';
-    } else {
-      this.languages = en;
-      this.language = 'en';
+    const language = localStorage.getItem('language');
+    switch (language) {
+      case 'zh_CN':
+        this.languages = zh;
+        this.language = 'zh-cn';
+        break;
+      case 'ru_RU':
+        this.languages = ru;
+        this.language = 'ru';
+        break;
+      default:
+        this.languages = en;
+        this.language = 'en';
     }
   }
 
