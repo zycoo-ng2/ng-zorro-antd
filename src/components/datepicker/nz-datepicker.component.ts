@@ -26,9 +26,6 @@ const zh = {
   'Next Decade': '下一年代',
   'Next Month': '下个月',
   'Next Year': '下一年',
-  'Year': '年',
-  'Month': '月',
-  'Day': '日',
   'Today': '今天',
   'Now': '此刻',
   'Choice Date': '选择日期',
@@ -40,20 +37,17 @@ const en = {
   'Clear': 'Clear',
   'Pre Year': 'Pre Year',
   'Pre Month': 'Pre Month',
-  'Choice Year': 'Choice Year',
-  'Choice Month': 'Choice Month',
-  'Choice Decade': 'Choice Decade',
+  'Choice Year': 'Set Year',
+  'Choice Month': 'Set Month',
+  'Choice Decade': 'Set Decade',
   'Pre Decade': 'Pre Decade',
   'Next Decade': 'Next Decade',
   'Next Month': 'Next Month',
   'Next Year': 'Next Year',
-  'Year': 'Year',
-  'Month': 'Month',
-  'Day': 'Day',
   'Today': 'Today',
   'Now': 'Now',
-  'Choice Date': 'Choice Date',
-  'Choice Time': 'Choice Time',
+  'Choice Date': 'Set Date',
+  'Choice Time': 'Set Time',
   'Confirm': 'Confirm'
 }
 
@@ -68,9 +62,6 @@ const ru = {
   'Next Decade': 'Следующее десятилетие',
   'Next Month': 'Следующий месяц',
   'Next Year': 'Следующий год',
-  'Year': 'Год',
-  'Month': 'Месяц',
-  'Day': 'День',
   'Today': 'Сегодня',
   'Now': 'Теперь',
   'Choice Date': 'Выбрать дату',
@@ -134,17 +125,17 @@ const ru = {
                 <a class="ant-calendar-prev-year-btn" [title]="language['Pre Year']" (click)="_preYear()"></a>
                 <a class="ant-calendar-prev-month-btn" [title]="language['Pre Month']" (click)="_preMonth()"></a>
                 <span class="ant-calendar-ym-select">
-                <a class="ant-calendar-month-select" [title]="languages['Choice Month']" (click)="_changeMonthView()">{{_showMonth + 1}}{{languages['Month']}}</a>
-                <a class="ant-calendar-year-select" [title]="languages['Choice Year']" (click)="_changeDecadeView($event)">{{_showYear}}{{languages['Year']}}</a>
+                  <a class="ant-calendar-month-select" [title]="languages['Choice Month']" (click)="_changeMonthView()">{{_showMonth + 1}}</a>
+                  <a class="ant-calendar-year-select" [title]="languages['Choice Year']" (click)="_changeDecadeView($event)">{{_showYear}}</a>
                 </span>
                 <a class="ant-calendar-next-month-btn" [title]="languages['Next Month']" (click)="_nextMonth()"></a>
                 <a class="ant-calendar-next-year-btn" [title]="languages['Next Year']" (click)="_nextYear()"></a>
               </div>
               <div style="position: relative;" *ngIf="_mode=='time'">
                 <span class="ant-calendar-my-select">
-                  <a class="ant-calendar-year-select" [title]="language['Choice Year']">{{_selectedYear}}{{languages['Year']}}</a>
-                  <a class="ant-calendar-month-select" [title]="language['Choice Month']">{{_showMonth + 1}}{{languages['Month']}}</a>
-                  <a class="ant-calendar-day-select">{{_selectedDate}}{{languages['Day']}}</a>
+                  <a class="ant-calendar-year-select" [title]="language['Choice Year']">{{_selectedYear}}</a>
+                  <a class="ant-calendar-month-select" [title]="language['Choice Month']">{{_showMonth + 1}}</a>
+                  <a class="ant-calendar-day-select">{{_selectedDate}}</a>
                 </span>
               </div>
               <div class="ant-calendar-month-panel" *ngIf="_mode=='month'">
